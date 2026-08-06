@@ -1,0 +1,212 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          UserRole  @default(STUDENT)
+  avatar        String?
+  language      String    @default("en")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  student       Student?
+  parent        Parent?
+  admin         Admin?
+
+  @@map("users")
+}
+
+model Student {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  age               Int?
+  currentLevel      StudentLevel @default(BEGINNER)
+  learningGoal      String?
+  preferredTime     String?
+
+  parentId          String?
+  parent            Parent?  @relation(fields: [parentId], references: [id])
+
+  progress          Progress[]
+  audioRecords      AudioRecord[]
+  assessments       Assessment[]
+  lessonsCompleted  LessonCompletion[]
+  payments          Payment[]
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("students")
+}
+
+model Parent {
+  id          String    @id @default(uuid())
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  children    Student[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("parents")
+}
+
+model Admin {
+  id          String    @id @default(uuid())
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  permissions String[]  @default([])
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("admins")
+}
+
+model Lesson {
+  id            String    @id @default(uuid())
+  title         String
+  content       String
+  surahId       String?
+  verseRange    String?
+  level         StudentLevel
+  type          LessonType @default(READING)
+  order         Int
+
+  completions   LessonCompletion[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("lessons")
+}
+
+model LessonCompletion {
+  id          String   @id @default(uuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  score       Int?
+  completedAt DateTime @default(now())
+
+  @@unique([studentId, lessonId])
+  @@map("lesson_completions")
+}
+
+model Progress {
+  id              String   @id @default(uuid())
+  studentId       String
+  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  category        ProgressCategory
+  score           Int
+  details         Json?
+
+  createdAt       DateTime @default(now())
+
+  @@map("progress")
+}
+
+model Assessment {
+  id              String   @id @default(uuid())
+  studentId       String
+  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  type            AssessmentType
+  levelAssigned   StudentLevel?
+  score           Int?
+  feedback        Json?
+  audioUrl        String?
+
+  createdAt       DateTime @default(now())
+
+  @@map("assessments")
+}
+
+model AudioRecord {
+  id          String   @id @default(uuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  filePath    String
+  duration    Int?
+  verseRef    String?
+
+  createdAt   DateTime @default(now())
+
+  @@map("audio_records")
+}
+
+model Payment {
+  id          String   @id @default(uuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  amount      Float
+  currency    String   @default("USD")
+  status      PaymentStatus @default(PENDING)
+  plan        String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("payments")
+}
+
+enum UserRole {
+  STUDENT
+  PARENT
+  ADMIN
+  TEACHER
+}
+
+enum StudentLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum LessonType {
+  READING
+  TAJWEED
+  MEMORIZATION
+  RECITATION
+}
+
+enum ProgressCategory {
+  READING
+  TAJWEED
+  MEMORIZATION
+  FLUENCY
+  OVERALL
+}
+
+enum AssessmentType {
+  INITIAL
+  PERIODIC
+  TAJWEED
+  MEMORIZATION
+  RECITATION
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
