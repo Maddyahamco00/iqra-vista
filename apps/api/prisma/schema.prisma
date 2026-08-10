@@ -8,88 +8,89 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  email         String    @unique
-  password      String
-  name          String
-  role          UserRole  @default(STUDENT)
-  avatar        String?
-  language      String    @default("en")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole @default(STUDENT)
+  avatar    String?
+  language  String   @default("en")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  student       Student?
-  parent        Parent?
-  admin         Admin?
+  student Student?
+  parent  Parent?
+  admin   Admin?
 
   @@map("users")
 }
 
 model Student {
-  id                String   @id @default(uuid())
-  userId            String   @unique
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  age               Int?
-  currentLevel      StudentLevel @default(BEGINNER)
-  learningGoal      String?
-  preferredTime     String?
+  age           Int?
+  currentLevel  StudentLevel @default(BEGINNER)
+  learningGoal  String?
+  preferredTime String?
 
-  parentId          String?
-  parent            Parent?  @relation(fields: [parentId], references: [id])
+  parentId String?
+  parent   Parent? @relation(fields: [parentId], references: [id], onDelete: SetNull)
 
-  progress          Progress[]
-  audioRecords      AudioRecord[]
-  assessments       Assessment[]
-  lessonsCompleted  LessonCompletion[]
-  payments          Payment[]
+  progress         Progress[]
+  audioRecords     AudioRecord[]
+  assessments      Assessment[]
+  lessonsCompleted LessonCompletion[]
+  payments         Payment[]
 
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("students")
 }
 
 model Parent {
-  id          String    @id @default(uuid())
-  userId      String    @unique
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  children    Student[]
+  children Student[]
 
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("parents")
 }
 
 model Admin {
-  id          String    @id @default(uuid())
-  userId      String    @unique
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  permissions String[]  @default([])
+  permissions String[] @default([])
 
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("admins")
 }
 
 model Lesson {
-  id            String    @id @default(uuid())
-  title         String
-  content       String
-  surahId       String?
-  verseRange    String?
-  level         StudentLevel
-  type          LessonType @default(READING)
-  order         Int
+  id         String       @id @default(uuid())
+  title      String
+  content    String
+  surahId    String?
+  verseRange String?
+  level      StudentLevel
+  type       LessonType   @default(READING)
+  order      Int
 
-  completions   LessonCompletion[]
+  completions LessonCompletion[]
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Exercise  Exercise[]
 
   @@map("lessons")
 }
@@ -108,63 +109,124 @@ model LessonCompletion {
 }
 
 model Progress {
-  id              String   @id @default(uuid())
-  studentId       String
-  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  id        String  @id @default(uuid())
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  category        ProgressCategory
-  score           Int
-  details         Json?
+  category ProgressCategory
+  score    Int
+  details  Json?
 
-  createdAt       DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@map("progress")
 }
 
 model Assessment {
-  id              String   @id @default(uuid())
-  studentId       String
-  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  id        String  @id @default(uuid())
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  type            AssessmentType
-  levelAssigned   StudentLevel?
-  score           Int?
-  feedback        Json?
-  audioUrl        String?
+  type          AssessmentType
+  levelAssigned StudentLevel?
+  score         Int?
+  feedback      Json?
+  audioUrl      String?
 
-  createdAt       DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@map("assessments")
 }
 
 model AudioRecord {
-  id          String   @id @default(uuid())
-  studentId   String
-  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  id        String  @id @default(uuid())
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  filePath    String
-  duration    Int?
-  verseRef    String?
+  filePath String
+  duration Int?
+  verseRef String?
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@map("audio_records")
 }
 
 model Payment {
-  id          String   @id @default(uuid())
-  studentId   String
-  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  id        String  @id @default(uuid())
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  amount      Float
-  currency    String   @default("USD")
-  status      PaymentStatus @default(PENDING)
-  plan        String
+  amount   Float
+  currency String        @default("USD")
+  status   PaymentStatus @default(PENDING)
+  plan     String
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("payments")
+}
+
+model TajweedRule {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  category    String
+  arabicName  String
+  description String
+  examples    Json
+  letters     String[]
+  audioRef    String?
+  difficulty  String   @default("BEGINNER")
+
+  verifiedBy String?
+  verifiedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tajweed_rules")
+}
+
+model Verse {
+  id              String  @id @default(uuid())
+  surahNumber     Int
+  ayahNumber      Int
+  arabicText      String
+  transliteration String
+  translation     String
+  audioUrl        String?
+  tajweedNotes    Json?
+
+  @@unique([surahNumber, ayahNumber])
+  @@map("verses")
+}
+
+model Exercise {
+  id       String @id @default(uuid())
+  lessonId String
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  type    ExerciseType
+  order   Int
+  content String // The question or instruction
+  answer  String?
+  options Json?
+  hint    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("exercises")
+}
+
+enum ExerciseType {
+  LISTEN
+  REPEAT
+  RECITE
+  QUIZ
+  FILL_BLANK
+  MATCHING
 }
 
 enum UserRole {
