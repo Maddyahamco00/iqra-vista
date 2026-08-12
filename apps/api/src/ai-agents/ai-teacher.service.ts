@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 
-interface LessonPlan {
+export interface LessonPlan {
   lessonId: string;
   title: string;
   type: string;
@@ -65,9 +65,9 @@ export class AiTeacherService {
   async answerQuestion(studentId: string, question: string): Promise<string> {
     // TODO: Integrate with LLM for Quran education Q&A
     const responses: Record<string, string> = {
-      'madd': 'Madd means to elongate a vowel sound. There are different types: Madd Tabee'i (2 counts), Madd Muttasil (4-5 counts), and Madd Munfasil (4-5 counts).',
+      'madd': "Madd means to elongate a vowel sound. There are different types: Madd Tabee'i (2 counts), Madd Muttasil (4-5 counts), and Madd Munfasil (4-5 counts).",
       'qalqalah': 'Qalqalah is the echoing sound produced when stopping on certain letters (ق, ط, ب, ج, د). It creates a bouncing effect.',
-      'default': 'That's a great question! Let me explain that concept in detail.',
+      'default': "That's a great question! Let me explain that concept in detail.",
     };
 
     const key = Object.keys(responses).find(k => question.toLowerCase().includes(k));

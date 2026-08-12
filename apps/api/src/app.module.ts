@@ -7,8 +7,6 @@ import { StudentsModule } from './students/students.module';
 import { AssessmentsModule } from './assessments/assessments.module';
 import { LessonsModule } from './lessons/lessons.module';
 import { ProgressModule } from './progress/progress.module';
-import { PaymentsModule } from './payments/payments.module';
-import { ReportsModule } from './reports/reports.module';
 import { AiAgentsModule } from './ai-agents/ai-agents.module';
 import { DatabaseModule } from './database/database.module';
 import { CommonModule } from './common/common.module';
@@ -33,8 +31,6 @@ import { CommonModule } from './common/common.module';
     AssessmentsModule,
     LessonsModule,
     ProgressModule,
-    PaymentsModule,
-    ReportsModule,
     AiAgentsModule,
   ],
 })

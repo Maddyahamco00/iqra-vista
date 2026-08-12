@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-interface PronunciationAnalysis {
+export interface PronunciationAnalysis {
   overallScore: number;
   makharij: {
     correct: string[];
@@ -32,7 +32,7 @@ export class AiPronunciationService {
       },
       tajweed: {
         rules: [
-          { rule: 'Madd Tabee'i', status: 'correct', details: 'All natural madds are correct' },
+          { rule: "Madd Tabee'i", status: 'correct', details: 'All natural madds are correct' },
           { rule: 'Qalqalah', status: 'partial', details: 'Qalqalah on د needs more force' },
           { rule: 'Ghunnah', status: 'correct', details: 'Nasalization is good' },
         ],

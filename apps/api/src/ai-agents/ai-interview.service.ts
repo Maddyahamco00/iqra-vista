@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-interface AssessmentResult {
+export interface AssessmentResult {
   level: string;
   score: number;
   feedback: {
