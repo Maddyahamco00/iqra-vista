@@ -52,6 +52,14 @@ export class AuthService {
     return result;
   }
 
+  async refresh(userId: string, email: string, role: string) {
+    const payload = { sub: userId, email, role };
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: { id: userId, email, role },
+    };
+  }
+
   async getProfile(userId: string) {
     return this.prisma.user.findUnique({
       where: { id: userId },
