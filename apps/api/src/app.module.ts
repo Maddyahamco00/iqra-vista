@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
+import { RolesGuard } from './auth/roles.guard';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { BullModule } from '@nestjs/bull';
 import { AuthModule } from './auth/auth.module';
@@ -32,6 +34,12 @@ import { CommonModule } from './common/common.module';
     LessonsModule,
     ProgressModule,
     AiAgentsModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}
