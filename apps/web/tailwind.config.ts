@@ -31,10 +31,15 @@ module.exports = {
           gold: '#c9a227',
           dark: '#1a3a2f',
           light: '#e8f5e9',
-        }
+        },
+        'iqra-primary': '#0F766E',
+        'iqra-gold': '#D4AF37',
+        'iqra-navy': '#0A192F',
+        'iqra-cream': '#FDFBF7',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        heading: ['Inter', 'system-ui', 'sans-serif'],
         arabic: ['Amiri', 'Scheherazade New', 'serif'],
       },
     },
