@@ -21,19 +21,11 @@ export function RoleSelector({ value, onChange }: RoleSelectorProps) {
             key={roleValue}
             type="button"
             onClick={() => onChange(roleValue)}
-            className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
-              selected
-                ? 'border-iqra-primary bg-iqra-primary/5'
-                : 'border-slate-200 hover:border-slate-300'
-            }`}
+            className={`auth-role-card${selected ? ' selected' : ''}`}
           >
-            <Icon
-              className={`w-8 h-8 mb-2 ${selected ? 'text-iqra-primary' : 'text-slate-400'}`}
-            />
-            <p className={`font-semibold text-sm ${selected ? 'text-iqra-primary' : 'text-slate-700'}`}>
-              {label}
-            </p>
-            <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+            <Icon className="role-icon" />
+            <p className="role-label">{label}</p>
+            <p className="role-desc">{description}</p>
           </button>
         );
       })}

@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Iqra Vista">
+  <title>Iqra Vista</title>
+  <!-- Background square with rounded corners -->
+  <rect width="512" height="512" rx="96" fill="url(#bgGrad)"/>
+  <!-- Outer octagon -->
+  <polygon points="176,48 336,48 464,176 464,336 336,464 176,464 48,336 48,176" fill="url(#markGrad)"/>
+  <!-- 8-point star -->
+  <polygon points="256,112 278,196 362,176 304,256 362,336 278,316 256,400 234,316 150,336 208,256 150,176 234,196" fill="#D9A441" opacity="0.95"/>
+  <!-- Center circle -->
+  <circle cx="256" cy="256" r="36" fill="white"/>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#020B24"/>
+      <stop offset="100%" stop-color="#041538"/>
+    </linearGradient>
+    <linearGradient id="markGrad" x1="48" y1="48" x2="464" y2="464" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1455B8"/>
+      <stop offset="100%" stop-color="#168FE8"/>
+    </linearGradient>
+  </defs>
+</svg>
