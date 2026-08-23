@@ -245,23 +245,23 @@ export function Footer() {
             </h3>
             <div className="flex flex-col gap-3">
               <a
-                href="tel:090-240-241-11"
+                href="tel:+2349024024111"
                 className="flex items-center gap-2.5 text-white/60 hover:text-white text-sm transition-colors duration-150 group"
               >
                 <svg className="w-4 h-4 text-brand-gold group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25V1.5A2.25 2.25 0 0019.5 3.75h-2.25A15 15 0 002.25 6.75z" />
                 </svg>
-                <span className="font-mono text-xs">090-240-241-11</span>
+                <span className="font-mono text-xs">+2349024024111</span>
               </a>
 
               <a
-                href="mailto:meddyahamco00@gmail.com"
+                href="mailto:maddyahamco00@gmail.com"
                 className="flex items-center gap-2.5 text-white/60 hover:text-white text-sm transition-colors duration-150 group"
               >
                 <svg className="w-4 h-4 text-brand-bright group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
-                <span className="text-xs truncate">meddyahamco00@gmail.com</span>
+                <span className="text-xs truncate">maddyahamco00@gmail.com</span>
               </a>
             </div>
           </div>
@@ -275,7 +275,7 @@ export function Footer() {
               CEO / FOUNDER
             </span>
             <h4 className="text-lg font-bold text-white tracking-wide">
-              Maddy Ahamko
+              Maddyahamco
             </h4>
           </div>
         </div>

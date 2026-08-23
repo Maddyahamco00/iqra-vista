@@ -22,21 +22,22 @@ export const metadata: Metadata = {
   description: 'AI-Powered Personalized Quran Learning & Future Education Platform. Quran → School → University → Life.',
   manifest: '/manifest.webmanifest',
   icons: {
-    icon: '/favicon.svg',
-    apple: '/apple-icon.svg',
+    icon: '/favicon.jpg',
+    apple: '/favicon.jpg',
+    shortcut: '/favicon.jpg',
   },
   openGraph: {
     title: 'Iqra Vista — Learn to Build the Future',
     description: 'AI-Powered Personalized Quran Learning & Future Education Platform',
     siteName: 'Iqra Vista',
-    images: [{ url: '/images/iqra-vista-logo.svg', width: 320, height: 80, alt: 'Iqra Vista' }],
+    images: [{ url: '/images/iqra-vista-logo.jpg', width: 512, height: 512, alt: 'Iqra Vista' }],
     type: 'website',
   },
   twitter: {
     card: 'summary',
     title: 'Iqra Vista — Learn to Build the Future',
     description: 'AI-Powered Personalized Quran Learning & Future Education Platform',
-    images: ['/images/iqra-vista-logo.svg'],
+    images: ['/images/iqra-vista-logo.jpg'],
   },
 };
 
