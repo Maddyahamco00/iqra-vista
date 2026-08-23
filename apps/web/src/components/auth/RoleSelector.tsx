@@ -1,4 +1,4 @@
-import { GraduationCap, Users } from 'lucide-react';
+﻿import { GraduationCap, Users } from 'lucide-react';
 import type { UserRole } from '@/types/auth';
 
 interface RoleSelectorProps {
@@ -21,7 +21,7 @@ export function RoleSelector({ value, onChange }: RoleSelectorProps) {
             key={roleValue}
             type="button"
             onClick={() => onChange(roleValue)}
-            className={`auth-role-card${selected ? ' selected' : ''}`}
+            className={`auth-role-card-dark${selected ? ' selected' : ''}`}
           >
             <Icon className="role-icon" />
             <p className="role-label">{label}</p>

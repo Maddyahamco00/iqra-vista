@@ -50,3 +50,5 @@ IQRA VISTA is an AI-powered personalized Quran learning and future education pla
 - The frontend root layout handles query and auth providers plus toast notifications.
 
 > Created `PROJECT_SUMMARY.md` at the repository root.
+git statusgit add apps/web/src/components/layout/Footer.tsx apps/web/src/app/landing/page.tsx
+git commit -m "feat: redesign Iqra Vista footer (Phase 2 premium design)"

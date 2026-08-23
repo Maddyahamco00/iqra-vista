@@ -1,180 +1,147 @@
-:root {
+﻿:root {
   --auth-primary: #1455B8;
-  --auth-primary-light: rgba(20, 85, 184, 0.1);
-  --auth-primary-ring: rgba(22, 143, 232, 0.2);
+  --auth-primary-light: rgba(20, 85, 184, 0.15);
+  --auth-primary-ring: rgba(22, 143, 232, 0.3);
   --auth-gold: #D9A441;
-  --auth-navy: #061B4F;
+  --auth-navy: #020B24;
   --auth-bright: #168FE8;
+  --auth-emerald: #18A96B;
 }
 
-.auth-input {
+/* Context-Aware Dark Auth Input */
+.auth-input-dark {
   box-sizing: border-box;
   -webkit-appearance: none;
   appearance: none;
-  height: 3rem;
+  height: 3.125rem;
   width: 100%;
-  border-radius: 0.625rem;
-  border: 1.5px solid #DBEAFE;
-  padding: 0 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  padding: 0 1rem 0 2.75rem;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease-in-out;
   font-size: 0.875rem;
   font-family: inherit;
-  background-color: #F5F8FC;
-  color: #061B4F;
+  background-color: rgba(11, 30, 72, 0.75);
+  color: #ffffff;
   display: block;
 }
 
-.auth-input:focus {
-  border-color: var(--auth-bright);
-  box-shadow: 0 0 0 3px var(--auth-primary-ring);
-  background-color: #ffffff;
+.auth-input-dark::placeholder {
+  color: rgba(147, 197, 253, 0.45);
 }
 
-.auth-input:-webkit-autofill,
-.auth-input:-webkit-autofill:hover,
-.auth-input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #F5F8FC inset;
-  -webkit-text-fill-color: #061B4F;
+.auth-input-dark:focus {
+  border-color: #168FE8;
+  background-color: rgba(11, 30, 72, 0.95);
+  box-shadow: 0 0 0 3px rgba(22, 143, 232, 0.25), 0 0 16px rgba(22, 143, 232, 0.2);
+}
+
+.auth-input-dark:-webkit-autofill,
+.auth-input-dark:-webkit-autofill:hover,
+.auth-input-dark:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #081B45 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.auth-input:disabled {
+.auth-input-dark:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.auth-btn-primary {
-  height: 3rem;
+/* Auth Primary Emerald/Teal Action Button */
+.auth-btn-emerald {
+  height: 3.125rem;
   width: 100%;
   border: none;
-  border-radius: 0.625rem;
-  background: linear-gradient(135deg, #1455B8 0%, #168FE8 100%);
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #18A96B 0%, #16A6A0 100%);
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9375rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s;
-  box-shadow: 0 4px 16px rgba(22, 143, 232, 0.3);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 16px rgba(24, 169, 107, 0.35);
   cursor: pointer;
 }
 
-.auth-btn-primary:hover:not(:disabled) {
+.auth-btn-emerald:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(22, 143, 232, 0.4);
+  box-shadow: 0 6px 24px rgba(24, 169, 107, 0.45);
+  background: linear-gradient(135deg, #1cb875 0%, #18b3ac 100%);
 }
 
-.auth-btn-primary:disabled {
+.auth-btn-emerald:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
-.auth-label {
+/* Auth Label Dark */
+.auth-label-dark {
   display: block;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #0A2A66;
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 0.375rem;
   letter-spacing: 0.01em;
 }
 
+/* Auth field error */
 .auth-field-error {
   font-size: 0.75rem;
-  color: #ef4444;
+  color: #f87171;
   margin-top: 0.375rem;
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-/* Mobile: full dark gradient */
-.auth-main-bg {
-  background: linear-gradient(160deg, #020B24 0%, #041538 40%, #061B4F 70%, #0A2A66 100%);
-}
-
-@media (min-width: 1024px) {
-  .auth-main-bg {
-    background: linear-gradient(160deg, #EFF6FF 0%, #F5F8FC 50%, #EFF6FF 100%);
-  }
-}
-
-.auth-role-card {
-  padding: 0.875rem;
+/* Role Selector Card Dark */
+.auth-role-card-dark {
+  padding: 0.75rem 1rem;
   border-radius: 0.75rem;
-  border: 1.5px solid #DBEAFE;
+  border: 1px solid rgba(96, 165, 250, 0.25);
   text-align: left;
   transition: all 0.2s;
-  background: #F5F8FC;
+  background: rgba(11, 30, 72, 0.6);
   cursor: pointer;
   width: 100%;
 }
 
-.auth-role-card:hover {
-  border-color: #93C5FD;
-  background: #EFF6FF;
+.auth-role-card-dark:hover {
+  border-color: #60A5FA;
+  background: rgba(11, 30, 72, 0.9);
 }
 
-.auth-role-card.selected {
-  border-color: var(--auth-bright);
-  background: rgba(22, 143, 232, 0.06);
+.auth-role-card-dark.selected {
+  border-color: #18A96B;
+  background: rgba(24, 169, 107, 0.12);
+  box-shadow: 0 0 12px rgba(24, 169, 107, 0.2);
 }
 
-.auth-role-card .role-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-bottom: 0.375rem;
+.auth-role-card-dark .role-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-bottom: 0.25rem;
   color: #93C5FD;
 }
 
-.auth-role-card.selected .role-icon {
-  color: var(--auth-bright);
+.auth-role-card-dark.selected .role-icon {
+  color: #18A96B;
 }
 
-.auth-role-card .role-label {
+.auth-role-card-dark .role-label {
   font-weight: 600;
-  font-size: 0.875rem;
-  color: #0A2A66;
+  font-size: 0.8125rem;
+  color: #ffffff;
 }
 
-.auth-role-card.selected .role-label {
-  color: var(--auth-primary);
-}
-
-.auth-role-card .role-desc {
-  font-size: 0.75rem;
-  color: #64748b;
-  margin-top: 0.125rem;
-}
-
-/* Left brand panel */
-.auth-brand-panel {
-  background: linear-gradient(160deg, #020B24 0%, #041538 35%, #061B4F 65%, #0A2A66 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.auth-brand-panel::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle, rgba(22, 143, 232, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.auth-brand-panel::after {
-  content: '';
-  position: absolute;
-  bottom: -10%;
-  left: -10%;
-  width: 50%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(24, 169, 107, 0.1) 0%, transparent 70%);
-  pointer-events: none;
+.auth-role-card-dark .role-desc {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
 }
