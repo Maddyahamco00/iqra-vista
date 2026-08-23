@@ -194,7 +194,7 @@ export default function LandingPage() {
               Start Your Journey Today
             </h2>
             <p className="text-white/70 mb-8 text-lg">
-              Join thousands of students learning with Iqra Vista's AI-powered platform.
+              Join thousands of students learning with Iqra Vista&apos;s AI-powered platform.
             </p>
             <Link 
               href="/register" 
