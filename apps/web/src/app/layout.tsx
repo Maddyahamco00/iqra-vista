@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Amiri } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from '@/components/common/QueryProvider';
 import { AuthProvider } from '@/components/common/AuthProvider';
@@ -9,6 +9,12 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-inter',
+});
+
+const amiri = Amiri({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '700'],
+  variable: '--font-amiri',
 });
 
 export const metadata: Metadata = {
@@ -44,7 +50,7 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#1455B8" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${amiri.variable} ${inter.className}`}>
         <QueryProvider>
           <AuthProvider>
             {children}

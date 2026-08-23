@@ -55,9 +55,9 @@ module.exports = {
         surface: '#F5F8FC',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Inter', 'system-ui', 'sans-serif'],
-        arabic: ['Amiri', 'Scheherazade New', 'serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        arabic: ['var(--font-amiri)', 'Amiri', 'serif'],
       },
       borderRadius: {
         '2xl': '1rem',
