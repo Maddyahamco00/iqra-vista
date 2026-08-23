@@ -1,61 +1,43 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { BrandLogo } from '@/components/ui/BrandLogo';
 
 /**
- * TopGoldAccent - Premium golden separator line with ornamental Islamic star
- * Inspired by the Iqra Vista reference design
+ * TopGoldAccent - Golden separator line matching reference image
  */
 function TopGoldAccent() {
   return (
-    <div className="relative w-full flex items-center justify-center py-2" aria-hidden="true">
-      {/* Background soft gold glow */}
+    <div className="relative w-full flex items-center justify-center py-4" aria-hidden="true">
       <div 
-        className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-4 w-3/4 max-w-2xl mx-auto blur-md opacity-30 pointer-events-none"
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-5 w-3/4 max-w-3xl mx-auto blur-md opacity-40 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(217, 164, 65, 0.6) 0%, rgba(217, 164, 65, 0) 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(217, 164, 65, 0.6) 0%, rgba(217, 164, 65, 0) 75%)',
         }}
       />
 
-      <div className="w-full max-w-4xl mx-auto flex items-center justify-center gap-2 sm:gap-4 px-4">
-        {/* Left fading line */}
-        <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-brand-gold" />
+      <div className="w-full max-w-5xl mx-auto flex items-center justify-center gap-3 sm:gap-4 px-4">
+        {/* Left gold line */}
+        <div className="h-[1.5px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/50 to-brand-gold" />
         
-        {/* Secondary diamond */}
-        <div className="hidden sm:block w-1.5 h-1.5 rotate-45 bg-brand-gold/60 rounded-xs" />
-        <div className="hidden sm:block h-[1px] w-8 bg-brand-gold/70" />
-
-        {/* Center 8-pointed Islamic star badge */}
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-950/80 border border-brand-gold/40 shadow-[0_0_12px_rgba(217,164,65,0.35)]">
-          <svg className="w-3.5 h-3.5 text-brand-gold" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0L14.59 4.41L19.07 1.93L18.41 7.02L23.49 7.68L21.01 12.16L25.42 14.75L21.01 17.34L23.49 21.82L18.41 22.48L19.07 27.57L14.59 25.09L12 29.5L9.41 25.09L4.93 27.57L5.59 22.48L0.51 21.82L2.99 17.34L-1.42 14.75L2.99 12.16L0.51 7.68L5.59 7.02L4.93 1.93L9.41 4.41L12 0Z" 
-              transform="scale(0.8) translate(3, 3)"
-            />
-          </svg>
-          <span className="text-[10px] sm:text-xs font-semibold tracking-widest text-brand-gold uppercase">
-            IQRA VISTA
-          </span>
-          <svg className="w-3.5 h-3.5 text-brand-gold" viewBox="0 0 24 24" fill="currentColor">
+        {/* Center 8-pointed Islamic Star Symbol ✦ */}
+        <div className="flex items-center justify-center w-7 h-7 rounded-full bg-navy-950/90 border border-brand-gold/60 text-brand-gold shadow-[0_0_16px_rgba(217,164,65,0.4)]">
+          <svg className="w-4 h-4 text-brand-gold" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0L14.59 4.41L19.07 1.93L18.41 7.02L23.49 7.68L21.01 12.16L25.42 14.75L21.01 17.34L23.49 21.82L18.41 22.48L19.07 27.57L14.59 25.09L12 29.5L9.41 25.09L4.93 27.57L5.59 22.48L0.51 21.82L2.99 17.34L-1.42 14.75L2.99 12.16L0.51 7.68L5.59 7.02L4.93 1.93L9.41 4.41L12 0Z" 
               transform="scale(0.8) translate(3, 3)"
             />
           </svg>
         </div>
 
-        {/* Secondary diamond */}
-        <div className="hidden sm:block h-[1px] w-8 bg-brand-gold/70" />
-        <div className="hidden sm:block w-1.5 h-1.5 rotate-45 bg-brand-gold/60 rounded-xs" />
-
-        {/* Right fading line */}
-        <div className="h-[1px] flex-1 bg-gradient-to-r from-brand-gold via-brand-gold/40 to-transparent" />
+        {/* Right gold line */}
+        <div className="h-[1.5px] flex-1 bg-gradient-to-r from-brand-gold via-brand-gold/50 to-transparent" />
       </div>
     </div>
   );
 }
 
 /**
- * IslamicPatternBackground - Subtle vector Islamic geometric pattern overlay
+ * IslamicPatternBackground - Vector geometric lattice pattern
  */
 function IslamicPatternBackground() {
   return (
@@ -65,22 +47,21 @@ function IslamicPatternBackground() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <pattern id="footer-geometric-pattern" x="0" y="0" width="56" height="56" patternUnits="userSpaceOnUse">
-            {/* 8-point geometric star & octagonal grid */}
+          <pattern id="footer-geometric-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
             <polygon
-              points="28,2 34,18 50,14 42,28 54,38 38,40 28,54 18,40 2,38 14,28 6,14 22,18"
+              points="30,2 36,18 52,14 44,30 56,40 40,42 30,58 20,42 4,40 16,30 8,14 24,18"
               fill="none"
               stroke="#D9A441"
               strokeWidth="0.7"
             />
-            <circle cx="28" cy="28" r="7" fill="none" stroke="#168FE8" strokeWidth="0.5" />
-            <circle cx="28" cy="28" r="2" fill="#D9A441" />
-            <rect x="20" y="20" width="16" height="16" fill="none" stroke="white" strokeWidth="0.4" transform="rotate(45 28 28)" />
+            <circle cx="30" cy="30" r="8" fill="none" stroke="#168FE8" strokeWidth="0.5" />
+            <circle cx="30" cy="30" r="2" fill="#D9A441" />
+            <rect x="22" y="22" width="16" height="16" fill="none" stroke="white" strokeWidth="0.4" transform="rotate(45 30 30)" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#footer-geometric-pattern)" />
       </svg>
-      {/* Deep ambient glow overlays */}
+      {/* Ambient background glows */}
       <div 
         className="absolute -top-32 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #1455B8 0%, transparent 70%)' }}
@@ -89,157 +70,6 @@ function IslamicPatternBackground() {
         className="absolute top-1/3 -right-24 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #18A96B 0%, transparent 70%)' }}
       />
-      <div 
-        className="absolute -bottom-24 -left-20 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #16A6A0 0%, transparent 70%)' }}
-      />
-    </div>
-  );
-}
-
-/**
- * EducationalJourneyModel - Quran -> School -> University -> Life
- */
-function EducationalJourneyModel() {
-  const stages = [
-    {
-      name: 'Quran',
-      label: 'Foundational',
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-        </svg>
-      ),
-      color: 'text-brand-gold bg-brand-gold/10 border-brand-gold/30',
-    },
-    {
-      name: 'School',
-      label: 'Core Academics',
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
-        </svg>
-      ),
-      color: 'text-brand-bright bg-brand-bright/10 border-brand-bright/30',
-    },
-    {
-      name: 'University',
-      label: 'Higher Degrees',
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.333A48.334 48.334 0 0012 9.75c-2.551 0-5.056.2-7.5.583V21" />
-        </svg>
-      ),
-      color: 'text-brand-emerald bg-brand-emerald/10 border-brand-emerald/30',
-    },
-    {
-      name: 'Life',
-      label: 'Lifelong Growth',
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.516 0c.85.493 1.508 1.333 1.508 2.316V18" />
-        </svg>
-      ),
-      color: 'text-brand-teal bg-brand-teal/10 border-brand-teal/30',
-    },
-  ];
-
-  return (
-    <div className="w-full rounded-2xl bg-white/[0.03] border border-white/10 p-4 sm:p-5 backdrop-blur-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-        <div>
-          <span className="text-[11px] uppercase tracking-widest font-semibold text-brand-gold">
-            Educational Blueprint
-          </span>
-          <h4 className="text-sm font-semibold text-white">
-            Integrated Learning Lifecycle
-          </h4>
-        </div>
-        <div className="inline-flex items-center gap-1.5 text-xs text-white/60 bg-navy-950/60 px-3 py-1 rounded-full border border-white/5 self-start sm:self-auto">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-emerald animate-pulse" />
-          <span>AI-Guided Curriculum</span>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {stages.map((stage, idx) => (
-          <div
-            key={stage.name}
-            className="flex items-center gap-3 p-2.5 rounded-xl bg-navy-950/40 border border-white/5 transition-all duration-200 hover:border-white/20 hover:bg-navy-950/70"
-          >
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center border ${stage.color} flex-shrink-0`}>
-              {stage.icon}
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-white tracking-wide">
-                  {stage.name}
-                </span>
-                {idx < stages.length - 1 && (
-                  <span className="text-brand-gold/60 text-xs hidden sm:inline" aria-hidden="true">→</span>
-                )}
-              </div>
-              <p className="text-[11px] text-white/50 truncate">
-                {stage.label}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/**
- * FooterColumn - Reusable accessible navigation column
- */
-interface FooterColumnProps {
-  title: string;
-  badge?: string;
-  links: Array<{
-    label: string;
-    href: string;
-    description?: string;
-  }>;
-}
-
-function FooterColumn({ title, badge, links }: FooterColumnProps) {
-  return (
-    <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-2">
-        <h3 className="text-white font-semibold text-xs uppercase tracking-wider">
-          {title}
-        </h3>
-        {badge && (
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-brand-gold/20 text-brand-gold border border-brand-gold/30">
-            {badge}
-          </span>
-        )}
-      </div>
-      <ul className="flex flex-col gap-2">
-        {links.map((link) => (
-          <li key={link.label}>
-            <Link
-              href={link.href}
-              className="group flex items-start gap-1.5 text-white/60 hover:text-white transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded py-0.5"
-            >
-              <span className="text-brand-gold/40 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all duration-150 text-xs mt-0.5" aria-hidden="true">
-                ›
-              </span>
-              <div className="flex flex-col">
-                <span className="text-sm font-normal group-hover:text-white transition-colors">
-                  {link.label}
-                </span>
-                {link.description && (
-                  <span className="text-[11px] text-white/40 group-hover:text-white/60 transition-colors">
-                    {link.description}
-                  </span>
-                )}
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -247,49 +77,49 @@ function FooterColumn({ title, badge, links }: FooterColumnProps) {
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Navigation Links tailored to Iqra Vista structure
   const quranLinks = [
-    { label: 'Quran Reading', href: '/student/lessons', description: 'Interactive recitation' },
-    { label: 'Tajweed Rules', href: '/student/lessons', description: 'Pronunciation precision' },
-    { label: 'Memorization (Hifz)', href: '/student/lessons', description: 'Structured revision' },
-    { label: 'AI Quran Tutor', href: '/student/dashboard', description: 'Real-time AI assistance' },
+    { label: 'Quran Reading', href: '/student/lessons' },
+    { label: 'Tajweed', href: '/student/lessons' },
+    { label: 'Memorization', href: '/student/lessons' },
+    { label: 'AI Tutor', href: '/student/dashboard' },
   ];
 
   const educationLinks = [
-    { label: 'School Curriculum', href: '/student/dashboard', description: 'K-12 structured studies' },
-    { label: 'University Studies', href: '/student/dashboard', description: 'Advanced academic tracks' },
-    { label: 'Specialized Courses', href: '/student/lessons', description: 'Arabic & Islamic sciences' },
-    { label: 'Assessments & Tests', href: '/student/assessments', description: 'Milestone evaluations' },
+    { label: 'School', href: '/student/dashboard' },
+    { label: 'University', href: '/student/dashboard' },
+    { label: 'Courses', href: '/student/lessons' },
+    { label: 'Learning Paths', href: '/student/dashboard' },
   ];
 
   const companyLinks = [
     { label: 'About Iqra Vista', href: '/landing' },
-    { label: 'Student Portal', href: '/student/dashboard' },
-    { label: 'Parent Portal', href: '/parent/dashboard' },
-    { label: 'Admin Console', href: '/admin/dashboard' },
-    { label: 'Sign In / Register', href: '/login' },
+    { label: 'Careers', href: '/landing' },
+    { label: 'Privacy Policy', href: '/landing' },
+    { label: 'Terms of Service', href: '/landing' },
+    { label: 'Contact Us', href: '/landing' },
   ];
 
   return (
     <footer 
-      className="w-full bg-gradient-to-b from-[#041538] via-[#020B24] to-[#010614] text-white relative overflow-hidden" 
+      className="w-full bg-[#020B24] text-white relative overflow-hidden" 
       role="contentinfo"
       aria-label="Site footer"
     >
-      {/* Background patterns & radial glow highlights */}
       <IslamicPatternBackground />
 
-      {/* Top Gold Accent Line Component */}
-      <div className="pt-8 sm:pt-10 pb-4">
+      {/* Top Gold Accent Separator Line */}
+      <div className="pt-6 sm:pt-8 pb-2">
         <TopGoldAccent />
       </div>
 
-      {/* Main Container */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Main Footer Content Container */}
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-10">
         
-        {/* Brand Showcase Header Section */}
-        <div className="pt-4 pb-8 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+        {/* Navigation & Contact Columns Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-10">
+          
+          {/* Brand Showcase Column (Left - 4 cols) */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
             <Link 
               href="/landing" 
               className="inline-block transition-transform hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-brand-gold focus:outline-none rounded-xl"
@@ -297,191 +127,171 @@ export function Footer() {
             >
               <BrandLogo variant="light" size="lg" type="full" />
             </Link>
-            <p className="text-brand-gold text-sm sm:text-base font-semibold tracking-wide flex items-center gap-2">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold" aria-hidden="true" />
-              Learn to Build the Future
+            
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+              AI-Powered Personalized Quran Learning &amp; Future Education Platform
             </p>
-            <p className="text-white/60 text-xs sm:text-sm max-w-md leading-relaxed">
-              Pioneering AI-powered education and sacred Quran learning — bridging timeless wisdom with modern scholastic excellence.
-            </p>
+
+            {/* Social Media Links */}
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-brand-royal/30 hover:border-brand-royal/60 transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-red-600/30 hover:border-red-500/60 transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-pink-600/30 hover:border-pink-500/60 transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter / X"
+                className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-brand-bright/30 hover:border-brand-bright/60 transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
-          {/* Quick Access Badges */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-2.5">
-            <Link
-              href="/student/dashboard"
-              className="px-4 py-2 rounded-xl bg-brand-royal/20 border border-brand-royal/40 text-brand-bright hover:bg-brand-royal/30 text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 shadow-sm"
-            >
-              <span>Student Portal</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-            <Link
-              href="/parent/dashboard"
-              className="px-4 py-2 rounded-xl bg-white/5 border border-white/15 text-white/80 hover:text-white hover:bg-white/10 text-xs font-semibold transition-all duration-200 flex items-center gap-1.5"
-            >
-              <span>Parent Portal</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-            <Link
-              href="/admin/dashboard"
-              className="px-4 py-2 rounded-xl bg-brand-emerald/15 border border-brand-emerald/30 text-brand-emerald hover:bg-brand-emerald/25 text-xs font-semibold transition-all duration-200 flex items-center gap-1.5"
-            >
-              <span>Admin Console</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Educational Identity Model (Quran -> School -> University -> Life) */}
-        <div className="py-8">
-          <EducationalJourneyModel />
-        </div>
-
-        {/* Main Footer Navigation Columns & Contact Information */}
-        <div className="py-8 border-t border-white/10">
-          <nav 
-            aria-label="Footer navigation" 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10"
-          >
-            {/* Column 1: Quran (3 cols) */}
-            <div className="lg:col-span-3">
-              <FooterColumn
-                title="Quran Learning"
-                badge="Tajweed"
-                links={quranLinks}
-              />
-            </div>
-
-            {/* Column 2: Education (3 cols) */}
-            <div className="lg:col-span-3">
-              <FooterColumn
-                title="Academic Tracks"
-                badge="K-University"
-                links={educationLinks}
-              />
-            </div>
-
-            {/* Column 3: Platform & Company (2 cols) */}
-            <div className="lg:col-span-2">
-              <FooterColumn
-                title="Platform"
-                links={companyLinks}
-              />
-            </div>
-
-            {/* Column 4: Executive Leadership & Direct Contact (4 cols) */}
-            <div className="lg:col-span-4">
-              <div className="rounded-2xl bg-gradient-to-br from-navy-900/90 to-navy-950/90 border border-brand-gold/30 p-5 sm:p-6 shadow-lg relative overflow-hidden backdrop-blur-md">
-                {/* Subtle gold corner ribbon effect */}
-                <div 
-                  className="absolute -top-12 -right-12 w-24 h-24 rounded-full blur-xl opacity-20 pointer-events-none"
-                  style={{ background: 'radial-gradient(circle, #D9A441 0%, transparent 70%)' }}
-                  aria-hidden="true"
-                />
-
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-royal to-brand-gold/80 flex items-center justify-center text-white font-bold text-sm shadow-md border border-white/20">
-                    MA
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold text-brand-gold uppercase tracking-wider block">
-                      Executive Leadership
-                    </span>
-                    <h3 className="text-base font-bold text-white leading-tight">
-                      Maddy Ahamko
-                    </h3>
-                    <p className="text-xs text-white/60">
-                      CEO & Founder, Iqra Vista
-                    </p>
-                  </div>
-                </div>
-
-                <div className="border-t border-white/10 pt-3 flex flex-col gap-2.5">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-white/50">
-                    Direct Inquiries & Contact
-                  </span>
-                  
-                  {/* Phone */}
-                  <a
-                    href="tel:090-240-241-11"
-                    className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-brand-gold/50 hover:bg-white/[0.08] transition-all duration-200 text-xs sm:text-sm text-white/90 group focus-visible:ring-2 focus-visible:ring-brand-gold focus:outline-none"
-                    aria-label="Call Maddy Ahamko at 090-240-241-11"
+          {/* Column 1: QURAN (2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              QURAN
+            </h3>
+            <ul className="flex flex-col gap-2.5">
+              {quranLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-white/60 hover:text-white text-sm transition-colors duration-150 block"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-brand-gold/15 border border-brand-gold/30 flex items-center justify-center text-brand-gold flex-shrink-0 group-hover:scale-105 transition-transform">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25V1.5A2.25 2.25 0 0019.5 3.75h-2.25A15 15 0 002.25 6.75z" />
-                      </svg>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] text-white/40 uppercase font-medium">Telephone</span>
-                      <span className="font-semibold text-white tracking-wide group-hover:text-brand-gold transition-colors">
-                        090-240-241-11
-                      </span>
-                    </div>
-                  </a>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                  {/* Email */}
-                  <a
-                    href="mailto:meddyahamco00@gmail.com"
-                    className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-brand-gold/50 hover:bg-white/[0.08] transition-all duration-200 text-xs sm:text-sm text-white/90 group focus-visible:ring-2 focus-visible:ring-brand-gold focus:outline-none"
-                    aria-label="Email Maddy Ahamko at meddyahamco00@gmail.com"
+          {/* Column 2: EDUCATION (2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              EDUCATION
+            </h3>
+            <ul className="flex flex-col gap-2.5">
+              {educationLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-white/60 hover:text-white text-sm transition-colors duration-150 block"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-brand-bright/15 border border-brand-bright/30 flex items-center justify-center text-brand-bright flex-shrink-0 group-hover:scale-105 transition-transform">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                      </svg>
-                    </div>
-                    <div className="flex flex-col min-w-0">
-                      <span className="text-[10px] text-white/40 uppercase font-medium">Email Address</span>
-                      <span className="font-semibold text-white tracking-wide group-hover:text-brand-bright transition-colors truncate">
-                        meddyahamco00@gmail.com
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Bottom Copyright & Brand Bar */}
-        <div className="border-t border-white/10 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
-            <div className="flex items-center gap-2 text-center sm:text-left">
-              <span>&copy; {currentYear} Iqra Vista. All rights reserved.</span>
-            </div>
+          {/* Column 3: COMPANY (2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              COMPANY
+            </h3>
+            <ul className="flex flex-col gap-2.5">
+              {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-white/60 hover:text-white text-sm transition-colors duration-150 block"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="flex items-center gap-2 text-brand-gold font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-gold/70" aria-hidden="true" />
-              <span>Learn to Build the Future.</span>
-            </div>
+          {/* Column 4: CONTACT (2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              CONTACT
+            </h3>
+            <div className="flex flex-col gap-3">
+              <a
+                href="tel:090-240-241-11"
+                className="flex items-center gap-2.5 text-white/60 hover:text-white text-sm transition-colors duration-150 group"
+              >
+                <svg className="w-4 h-4 text-brand-gold group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25V1.5A2.25 2.25 0 0019.5 3.75h-2.25A15 15 0 002.25 6.75z" />
+                </svg>
+                <span className="font-mono text-xs">090-240-241-11</span>
+              </a>
 
-            <div className="flex items-center gap-4 text-white/40">
-              <Link href="/landing" className="hover:text-white transition-colors">
-                Privacy
-              </Link>
-              <span aria-hidden="true">•</span>
-              <Link href="/landing" className="hover:text-white transition-colors">
-                Terms
-              </Link>
-              <span aria-hidden="true">•</span>
-              <Link href="/landing" className="hover:text-white transition-colors">
-                Accessibility
-              </Link>
+              <a
+                href="mailto:meddyahamco00@gmail.com"
+                className="flex items-center gap-2.5 text-white/60 hover:text-white text-sm transition-colors duration-150 group"
+              >
+                <svg className="w-4 h-4 text-brand-bright group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+                <span className="text-xs truncate">meddyahamco00@gmail.com</span>
+              </a>
             </div>
           </div>
+
+        </div>
+
+        {/* CEO / FOUNDER Centered Section */}
+        <div className="border-t border-white/10 pt-8 pb-4 text-center">
+          <div className="inline-flex flex-col items-center justify-center">
+            <span className="text-[11px] font-bold text-brand-gold uppercase tracking-widest mb-1">
+              CEO / FOUNDER
+            </span>
+            <h4 className="text-lg font-bold text-white tracking-wide">
+              Maddy Ahamko
+            </h4>
+          </div>
+        </div>
+
+        {/* Bottom Copyright & Tagline Row */}
+        <div className="border-t border-white/10 pt-6 mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-white/50 text-center">
+          <p>
+            &copy; {currentYear} Iqra Vista. All rights reserved.
+          </p>
+          <span className="hidden sm:inline text-white/20">|</span>
+          <p className="text-white/70 italic font-medium">
+            &ldquo;Learn to Build the Future.&rdquo;
+          </p>
         </div>
 
       </div>
-
-      {/* Bottom ambient accent bar */}
-      <div 
-        className="h-1 w-full"
-        style={{
-          background: 'linear-gradient(90deg, #1455B8 0%, #168FE8 25%, #18A96B 50%, #D9A441 75%, #1455B8 100%)',
-        }}
-        aria-hidden="true"
-      />
     </footer>
   );
 }
