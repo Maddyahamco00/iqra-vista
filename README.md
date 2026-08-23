@@ -32,60 +32,174 @@ The platform combines:
 
 🏗️ Architecture
 
-IQRA VISTA uses a Turborepo monorepo designed for scalable development.
+IQRA VISTA is built as a scalable Turborepo monorepo. The platform separates user-facing applications, backend APIs, shared packages, and specialized AI services while keeping them in a single development workspace.
+
+                              IQRA VISTA
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+              Applications                  Services
+                    │                           │
+        ┌───────────┼───────────┐       ┌──────┴─────────┐
+        │           │           │       │                │
+      Web          API        Mobile    AI Agents    Speech Services
+   Next.js       NestJS       Future       │
+        │           │                    │
+        │           ├────────────┐       │
+        │           │            │       │
+        │       PostgreSQL      Redis ◄──┘
+        │           │            │
+        └───────────┴────────────┴──────────────┐
+                                                │
+                                         Shared Packages
+                                      UI • Types • Config
+                                                │
+                                         Infrastructure
+                                  Docker • AWS • Cloudflare
+
+Architecture Principles
+
+- Monorepo: Turborepo + npm Workspaces
+- Modular Backend: NestJS modules organized by domain
+- Shared Packages: Reusable UI, types, and configuration
+- AI Services: Specialized agents separated by responsibility
+- Scalable Infrastructure: Docker and cloud-ready architecture
+- Secure APIs: Authentication, authorization, validation, and rate limiting
+- Database: PostgreSQL with Prisma ORM
+- Caching & Queues: Redis and Bull
+
+---
+
+📁 Project Structure
+
+The repository is organized into applications, shared packages, AI services, infrastructure, and documentation.
 
 iqra-vista/
-├── apps/
-│   ├── web/              # Next.js frontend
-│   ├── api/              # NestJS backend
-│   └── mobile/           # Mobile application workspace
 │
-├── packages/             # Shared packages
-├── services/             # AI & speech services
-├── infra/                # Infrastructure configuration
-├── docs/                 # Documentation
-└── scripts/              # Automation scripts
-
-The architecture is designed to support independent applications, shared packages, and specialized AI services.
+├── apps/
+│   ├── web/                       # Next.js web application
+│   │   ├── src/
+│   │   │   ├── app/               # App Router / pages
+│   │   │   ├── components/        # Reusable UI
+│   │   │   ├── hooks/             # React hooks
+│   │   │   └── stores/            # Zustand stores
+│   │   └── public/
+│   │
+│   ├── api/                       # NestJS backend API
+│   │   ├── src/
+│   │   │   ├── modules/           # Domain modules
+│   │   │   ├── database/          # Database configuration
+│   │   │   └── main.ts             # API entry point
+│   │   └── prisma/                # Prisma schema & migrations
+│   │
+│   └── mobile/                    # Future mobile application
+│
+├── packages/
+│   ├── ui/                        # Shared UI components
+│   ├── types/                     # Shared TypeScript types
+│   ├── eslint-config/             # Shared ESLint configuration
+│   └── typescript-config/         # Shared TypeScript configuration
+│
+├── services/
+│   ├── ai-interview/              # Student admission & placement
+│   ├── ai-assessment/             # Student assessment
+│   ├── ai-teacher/                # Personalized teaching
+│   ├── ai-pronunciation/          # Recitation analysis
+│   ├── ai-personalization/        # Adaptive learning
+│   ├── ai-parent-report/          # Parent progress reports
+│   ├── ai-supervisor/             # Teaching & learning supervision
+│   ├── ai-principal/              # Institutional intelligence
+│   ├── ai-finance/                # Finance automation
+│   └── speech-recognition/        # Speech processing
+│
+├── infra/                         # Infrastructure configuration
+├── docs/                          # Architecture & technical docs
+├── scripts/                       # Automation scripts
+│
+├── .env.example                   # Environment template
+├── docker-compose.yml             # Local infrastructure
+├── turbo.json                     # Turborepo configuration
+└── package.json                   # Root workspace configuration
 
 ---
 
 🛠️ Tech Stack
 
-Layer| Technology
+Category| Technology
 Monorepo| Turborepo, npm Workspaces
 Frontend| Next.js, React, TypeScript, Tailwind CSS
-State / Data| Zustand, React Query
-Backend| NestJS, Prisma
+UI / State| Framer Motion, Zustand, React Query
+Backend| NestJS, Node.js, TypeScript
+ORM| Prisma
 Database| PostgreSQL
-Cache / Queues| Redis, Bull
+Cache / Queue| Redis, Bull
 Authentication| Passport.js, JWT, bcrypt
 AI / ML| OpenAI, Hugging Face, Speech Recognition
 Payments| Stripe
 Storage| AWS S3
 Email| Nodemailer / SMTP
-DevOps| Docker, Docker Compose, Terraform
-Testing| Jest, React Testing Library, Supertest
-API Docs| Swagger / OpenAPI
+Infrastructure| Docker, Docker Compose, Terraform
+Testing| Jest, Supertest, React Testing Library
+API Documentation| Swagger / OpenAPI
+CI/CD| GitHub Actions
+Monitoring| Sentry, CloudWatch
+CDN / DNS| Cloudflare
 
 ---
 
 🤖 AI Agent System
 
-IQRA VISTA is designed around specialized AI agents that work together as a digital school.
+AI is a core part of IQRA VISTA. Instead of relying on one general-purpose AI, the platform is designed around specialized agents, each responsible for a specific educational or operational function.
 
-Agent| Purpose
-AI Interview Agent| Student admission and placement
-AI Assessment Agent| Evaluates proficiency and learning needs
-AI Teacher Agent| Personalized Qur'an, Tajweed, and Hifz coaching
-AI Pronunciation Agent| Recitation and pronunciation analysis
-AI Personalization Agent| Adapts learning paths to each student
-AI Parent Report Agent| Generates student progress reports
-AI Supervisor Agent| Monitors learning and teaching quality
-AI Principal Agent| Supports curriculum and institutional management
-AI Finance Agent| Billing and subscription workflows
-AI Multilingual Tutor| Supports learners across languages
+                         ┌──────────────────────┐
+                         │     IQRA VISTA AI    │
+                         │    Intelligence Hub  │
+                         └──────────┬───────────┘
+                                    │
+        ┌───────────────────────────┼───────────────────────────┐
+        │                           │                           │
+        ▼                           ▼                           ▼
+   🎓 Learning                  🕌 Quran                    🏫 School
+    Agents                     Agents                     Agents
+        │                           │                           │
+   ┌────┴─────┐               ┌─────┴──────┐             ┌──────┴─────┐
+   │           │               │            │             │            │
+   ▼           ▼               ▼            ▼             ▼            ▼
+Interview   Assessment      Teacher    Pronunciation   Supervisor   Principal
+   │           │               │            │             │            │
+   └───────────┴───────────────┴────────────┴─────────────┴────────────┘
+                                    │
+                                    ▼
+                         Personalized Learning
+                                    │
+                    ┌───────────────┼───────────────┐
+                    ▼               ▼               ▼
+              Parent Reports    Multilingual      Finance
+                                  Tutor
 
+Core AI Agents
+
+Agent| Responsibility
+🎤 AI Interview Agent| Admission interviews and placement
+📊 AI Assessment Agent| Evaluates learner proficiency
+👨‍🏫 AI Teacher Agent| Personalized Qur'an, Tajweed, and Hifz teaching
+🗣️ AI Pronunciation Agent| Recitation and pronunciation analysis
+🧠 AI Personalization Agent| Creates adaptive learning paths
+👨‍👩‍👧 AI Parent Report Agent| Generates learner progress reports
+👁️ AI Supervisor Agent| Monitors learning and teaching quality
+🏫 AI Principal Agent| Supports school-level operations
+💳 AI Finance Agent| Billing and subscription workflows
+🌍 AI Multilingual Tutor| Multilingual learner assistance
+
+AI Design Philosophy
+
+The AI layer is designed to assist education, not replace qualified teachers or scholars.
+
+For religious content:
+
+«Verified Qur'anic sources → Scholarly validation → AI-assisted delivery»
+
+This ensures that AI-generated educational experiences remain grounded in reliable Islamic sources.
 ---
 
 ✨ Key Features
@@ -219,51 +333,6 @@ Web:     http://localhost:3000
 API:     http://localhost:3001
 Swagger: http://localhost:3001/api/docs
 
----
-
-📁 Project Structure
-
-iqra-vista/
-│
-├── apps/
-│   ├── api/
-│   │   ├── src/
-│   │   │   ├── modules/
-│   │   │   ├── database/
-│   │   │   └── main.ts
-│   │   └── prisma/
-│   │
-│   ├── web/
-│   │   ├── src/
-│   │   │   ├── app/
-│   │   │   ├── components/
-│   │   │   ├── hooks/
-│   │   │   └── stores/
-│   │   └── public/
-│   │
-│   └── mobile/
-│
-├── packages/
-│   ├── eslint-config/
-│   ├── typescript-config/
-│   ├── ui/
-│   └── types/
-│
-├── services/
-│   ├── ai-interview/
-│   ├── ai-teacher/
-│   ├── ai-principal/
-│   ├── ai-parent-report/
-│   ├── ai-personalization/
-│   ├── ai-pronunciation/
-│   └── speech-recognition/
-│
-├── infra/
-├── docs/
-├── scripts/
-├── .env.example
-├── turbo.json
-└── package.json
 
 ---
 
