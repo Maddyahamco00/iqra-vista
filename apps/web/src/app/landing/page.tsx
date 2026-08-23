@@ -1,9 +1,8 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { AiStudentHeroVisual } from '@/components/ui/AiStudentHeroVisual';
 
 /**
  * IslamicPattern - Subtle geometric starry lattice background
@@ -126,8 +125,27 @@ export default function LandingPage() {
             </div>
 
             {/* Hero Right Visual Column */}
-            <div className="lg:col-span-5 flex justify-center">
-              <AiStudentHeroVisual variant="hero" />
+            <div className="lg:col-span-5 flex justify-center items-center">
+              <div className="relative w-full max-w-[560px] mx-auto">
+                {/* Ambient glow behind image */}
+                <div
+                  className="absolute inset-0 rounded-3xl blur-3xl opacity-30 pointer-events-none"
+                  style={{ background: 'radial-gradient(ellipse, #168FE8 0%, #18A96B 40%, transparent 75%)' }}
+                  aria-hidden="true"
+                />
+                {/* Decorative ring */}
+                <div
+                  className="absolute inset-[-8px] rounded-3xl border border-brand-bright/20 pointer-events-none"
+                  aria-hidden="true"
+                />
+                <img
+                  src="/images/heroes/iqra-vista-student-tablet.jpg"
+                  alt="Student using a tablet for personalized Quran learning with Iqra Vista"
+                  className="relative w-full h-auto object-contain rounded-2xl shadow-[0_24px_64px_rgba(0,0,0,0.5)]"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </div>
             </div>
 
           </div>

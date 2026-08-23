@@ -1,10 +1,10 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BrandLogo } from '@/components/ui/BrandLogo';
 import { Footer } from '@/components/layout/Footer';
-import { AiStudentHeroVisual } from '@/components/ui/AiStudentHeroVisual';
+import { AuthVisual } from '@/components/auth/AuthVisual';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
