@@ -57,19 +57,19 @@ export function AuthLayout({
       <IslamicPattern />
 
       {/* Ambient background glows */}
-      <div 
+      <div
         className="absolute top-10 left-10 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #168FE8 0%, transparent 70%)' }}
       />
-      <div 
+      <div
         className="absolute bottom-40 right-10 w-96 h-96 rounded-full blur-3xl opacity-15 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #18A96B 0%, transparent 70%)' }}
       />
 
       {/* Top Header Logo Bar */}
       <header className="relative z-10 w-full pt-6 pb-2 px-4 sm:px-8 max-w-7xl mx-auto flex items-center justify-between">
-        <Link 
-          href="/landing" 
+        <Link
+          href="/landing"
           className="inline-block transition-transform hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-brand-gold focus:outline-none rounded-xl"
           aria-label="Iqra Vista Home"
         >
@@ -86,114 +86,18 @@ export function AuthLayout({
 
       {/* Main Authentication Grid */}
       <main className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex-1 flex items-center">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          
-          {/* Left Column: Brand, Vision, AI Visual, Quote */}
-          <div className="lg:col-span-6 flex flex-col gap-6 text-center lg:text-left">
-            <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight">
-                {isRegister ? (
-                  <>
-                    Create Your<br />
-                    <span className="bg-gradient-to-r from-[#18A96B] via-[#168FE8] to-[#1455B8] bg-clip-text text-transparent">
-                      Iqra Vista Account
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Welcome to<br />
-                    <span className="text-[#168FE8]">Iqra Vista</span>
-                  </>
-                )}
-              </h1>
-              <p className="mt-3 text-sm sm:text-base text-white/70 max-w-md mx-auto lg:mx-0 leading-relaxed">
-                {isRegister
-                  ? 'Join thousands of students and parents on the AI-powered path from Quran to a successful future.'
-                  : 'AI-Powered Personalized Quran Learning & Future Education Platform'}
-              </p>
-            </div>
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
 
-            {/* Badges row */}
-            {isRegister ? (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-md mx-auto lg:mx-0">
-                <div className="p-2 rounded-xl bg-white/[0.04] border border-white/10 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-md bg-brand-emerald/20 flex items-center justify-center text-brand-emerald text-xs">
-                    ⚡
-                  </div>
-                  <span className="text-[11px] font-medium text-white/80 leading-tight text-left">AI-Powered Learning</span>
-                </div>
-                <div className="p-2 rounded-xl bg-white/[0.04] border border-white/10 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-md bg-brand-bright/20 flex items-center justify-center text-brand-bright text-xs">
-                    👤
-                  </div>
-                  <span className="text-[11px] font-medium text-white/80 leading-tight text-left">Personalized Experience</span>
-                </div>
-                <div className="p-2 rounded-xl bg-white/[0.04] border border-white/10 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-md bg-brand-gold/20 flex items-center justify-center text-brand-gold text-xs">
-                    📖
-                  </div>
-                  <span className="text-[11px] font-medium text-white/80 leading-tight text-left">Quran to Life Success</span>
-                </div>
-                <div className="p-2 rounded-xl bg-white/[0.04] border border-white/10 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-md bg-teal-400/20 flex items-center justify-center text-teal-400 text-xs">
-                    🛡️
-                  </div>
-                  <span className="text-[11px] font-medium text-white/80 leading-tight text-left">Trusted by Parents</span>
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald text-xs font-semibold">
-                  <span>📖</span>
-                  <span>QURAN</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-semibold">
-                  <span>🏫</span>
-                  <span>SCHOOL</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-bright/10 border border-brand-bright/30 text-brand-bright text-xs font-semibold">
-                  <span>🎓</span>
-                  <span>UNIVERSITY</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-semibold">
-                  <span>👥</span>
-                  <span>LIFE</span>
-                </div>
-              </div>
-            )}
-
-            {/* AI Student Hero Visual Component */}
-            <div className="max-w-md mx-auto lg:mx-0 w-full">
-              <AiStudentHeroVisual variant="auth" />
-            </div>
-
-            {/* Islamic Quote Box */}
-            <div className="max-w-md mx-auto lg:mx-0 w-full rounded-2xl bg-white/[0.03] border border-white/10 p-4 border-l-4 border-l-brand-gold text-left">
-              {isRegister ? (
-                <>
-                  <p className="font-arabic text-xl text-white font-bold mb-1">
-                    وَقُل رَّبِّ زِدْنِي عِلْمًا
-                  </p>
-                  <p className="text-xs text-white/70">
-                    &ldquo;And say, &apos;My Lord, increase me in knowledge.&apos;&rdquo;{' '}
-                    <span className="text-brand-gold font-medium">(Quran 20:114)</span>
-                  </p>
-                </>
-              ) : (
-                <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
-                  <span className="text-brand-gold font-serif text-lg mr-1">&ldquo;</span>
-                  Read the Quran, Learn the Deen, Build Knowledge, Change the World. This is the Iqra Vista Journey.
-                  <span className="text-brand-gold font-serif text-lg ml-1">&rdquo;</span>
-                </p>
-              )}
-            </div>
-
+          {/* ── Left Column: AuthVisual (family photo + branding) ── */}
+          {/* Hidden on mobile — form gets full width; shown lg+ */}
+          <div className="hidden lg:flex lg:col-span-6 rounded-3xl bg-[#041538]/70 border border-blue-500/20 overflow-hidden">
+            <AuthVisual mode={currentMode} />
           </div>
 
-          {/* Right Column: Dark Glassmorphic Auth Card */}
-          <div className="lg:col-span-6 w-full max-w-lg mx-auto">
+          {/* ── Right Column: Dark Glassmorphic Auth Card ── */}
+          <div className="lg:col-span-6 w-full max-w-lg mx-auto flex flex-col justify-center">
             <div className="rounded-3xl bg-[#041538]/85 border border-blue-500/30 backdrop-blur-xl p-6 sm:p-8 shadow-[0_16px_48px_rgba(0,0,0,0.6)]">
-              
+
               {/* Form Card Top Heading */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-4">
@@ -252,6 +156,11 @@ export function AuthLayout({
               </p>
 
             </div>
+
+            {/* Mobile-only: compact brand caption below the form */}
+            <p className="lg:hidden mt-4 text-center text-xs text-white/40 leading-relaxed">
+              Quran &nbsp;·&nbsp; School &nbsp;·&nbsp; University &nbsp;·&nbsp; Life
+            </p>
           </div>
 
         </div>
@@ -260,7 +169,7 @@ export function AuthLayout({
       {/* Bottom Trust Highlights Bar */}
       <div className="relative z-10 w-full border-t border-white/10 py-6 my-6 bg-[#041538]/40">
         <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
-          
+
           <div className="flex items-center justify-center sm:justify-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5">
             <div className="w-9 h-9 rounded-xl bg-brand-bright/15 border border-brand-bright/30 flex items-center justify-center text-brand-bright flex-shrink-0">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>

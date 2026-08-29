@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 
@@ -138,12 +139,14 @@ export default function LandingPage() {
                   className="absolute inset-[-8px] rounded-3xl border border-brand-bright/20 pointer-events-none"
                   aria-hidden="true"
                 />
-                <img
+                <Image
                   src="/images/heroes/iqra-vista-student-tablet.jpg"
                   alt="Student using a tablet for personalized Quran learning with Iqra Vista"
+                  width={560}
+                  height={560}
+                  priority
                   className="relative w-full h-auto object-contain rounded-2xl shadow-[0_24px_64px_rgba(0,0,0,0.5)]"
-                  loading="eager"
-                  fetchPriority="high"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 560px"
                 />
               </div>
             </div>

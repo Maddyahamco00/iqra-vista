@@ -6,6 +6,8 @@
  * Responsive: visible on md+ screens, hidden on mobile to give form full width.
  */
 
+import Image from 'next/image';
+
 interface AuthVisualProps {
   mode?: 'login' | 'register';
 }
@@ -37,12 +39,14 @@ export function AuthVisual({ mode = 'login' }: AuthVisualProps) {
             borderRadius: '1rem',
           }}
         />
-        <img
+        <Image
           src="/images/heroes/iqra-vista-family-quran.jpg"
           alt="Muslim family — father, mother and child — reading the Quran together with an Iqra Vista tablet"
+          width={400}
+          height={480}
+          priority
           className="relative w-full h-auto object-contain rounded-xl shadow-[0_20px_56px_rgba(0,0,0,0.55)]"
-          loading="eager"
-          fetchPriority="high"
+          sizes="(max-width: 1024px) 0vw, 40vw"
         />
       </div>
 
