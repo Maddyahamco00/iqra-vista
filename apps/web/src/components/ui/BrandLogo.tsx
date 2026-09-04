@@ -15,7 +15,7 @@ export function BrandLogo({ variant = 'dark', size = 'md', type = 'full' }: Bran
   if (type === 'icon') {
     return (
       <Image
-        src="/images/iqra-vista-icon.svg"
+        src="/images/iqra-vista-icon.jpg"
         alt="Iqra Vista"
         width={dim}
         height={dim}
@@ -31,7 +31,7 @@ export function BrandLogo({ variant = 'dark', size = 'md', type = 'full' }: Bran
     return (
       <div className="flex items-center gap-2">
         <Image
-          src="/images/iqra-vista-icon.svg"
+          src="/images/iqra-vista-icon.jpg"
           alt=""
           width={dim}
           height={dim}
@@ -58,7 +58,7 @@ export function BrandLogo({ variant = 'dark', size = 'md', type = 'full' }: Bran
     return (
       <div className="rounded-xl px-3 py-1.5" style={{ background: 'rgba(255,255,255,0.08)' }}>
         <Image
-          src="/images/iqra-vista-logo.svg"
+          src="/images/iqra-vista-logo.jpg"
           alt="Iqra Vista"
           width={logoWidth}
           height={logoHeight}
@@ -71,11 +71,11 @@ export function BrandLogo({ variant = 'dark', size = 'md', type = 'full' }: Bran
 
   return (
     <Image
-      src="/images/iqra-vista-logo.svg"
+      src="/images/iqra-vista-logo.jpg"
       alt="Iqra Vista"
       width={logoWidth}
       height={logoHeight}
-      className="object-contain"
+      className="object-contain rounded-md"
       priority
     />
   );

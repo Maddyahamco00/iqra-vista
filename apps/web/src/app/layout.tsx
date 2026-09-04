@@ -21,11 +21,6 @@ export const metadata: Metadata = {
   title: 'Iqra Vista — Learn to Build the Future',
   description: 'AI-Powered Personalized Quran Learning & Future Education Platform. Quran → School → University → Life.',
   manifest: '/manifest.webmanifest',
-  icons: {
-    icon: '/favicon.jpg',
-    apple: '/favicon.jpg',
-    shortcut: '/favicon.jpg',
-  },
   openGraph: {
     title: 'Iqra Vista — Learn to Build the Future',
     description: 'AI-Powered Personalized Quran Learning & Future Education Platform',
