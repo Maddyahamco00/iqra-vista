@@ -181,4 +181,182 @@ export class StudentsService {
       to: toDate.toISOString().split('T')[0],
     };
   }
+
+  // ── Today's Plan ─────────────────────────────────────────────────────────
+
+  async getMeTodayPlan(userId: string) {
+    const student = await this.prisma.student.findUnique({
+      where: { userId },
+      select: { id: true, currentLevel: true, lessonsCompleted: { select: { lessonId: true } } },
+    });
+    if (!student) throw new NotFoundException('Student profile not found');
+
+    const completedIds = new Set(student.lessonsCompleted.map((lc) => lc.lessonId));
+
+    // Fetch all lessons at student's level ordered by curriculum order
+    const lessons = await this.prisma.lesson.findMany({
+      where: { level: student.currentLevel },
+      orderBy: { order: 'asc' },
+    });
+
+    // Split into incomplete (next up) and recently completed (for review)
+    const incomplete = lessons.filter((l) => !completedIds.has(l.id)).slice(0, 4);
+    const recentCompleted = lessons.filter((l) => completedIds.has(l.id)).slice(-1);
+
+    const tasks = [...recentCompleted, ...incomplete].map((l) => ({
+      id: l.id,
+      title: l.title,
+      type: l.type.toLowerCase() as string,
+      completed: completedIds.has(l.id),
+    }));
+
+    return { tasks, level: student.currentLevel };
+  }
+
+  // ── Recent Performance ────────────────────────────────────────────────────
+
+  async getMeRecentPerformance(userId: string) {
+    const student = await this.prisma.student.findUnique({
+      where: { userId },
+      select: { id: true },
+    });
+    if (!student) throw new NotFoundException('Student profile not found');
+
+    // Last 28 days of progress entries
+    const since = new Date(Date.now() - 28 * 24 * 60 * 60 * 1000);
+    const entries = await this.prisma.progress.findMany({
+      where: { studentId: student.id, createdAt: { gte: since } },
+      orderBy: { createdAt: 'asc' },
+      select: { score: true, createdAt: true, category: true },
+    });
+
+    // Aggregate by day — average score across all entries that day
+    const dayMap = new Map<string, { total: number; count: number }>();
+    for (const e of entries) {
+      const day = e.createdAt.toISOString().split('T')[0];
+      const bucket = dayMap.get(day) ?? { total: 0, count: 0 };
+      bucket.total += e.score;
+      bucket.count += 1;
+      dayMap.set(day, bucket);
+    }
+
+    const points = Array.from(dayMap.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .slice(-7) // last 7 active days
+      .map(([date, { total, count }]) => ({
+        day: new Date(date + 'T12:00:00Z').toLocaleDateString('en-US', { weekday: 'short' }),
+        score: Math.round(total / count),
+        date,
+      }));
+
+    // Week-over-week delta: compare last 7 active days avg vs prior 7
+    const allDays = Array.from(dayMap.entries()).sort(([a], [b]) => a.localeCompare(b));
+    const last7 = allDays.slice(-7);
+    const prev7 = allDays.slice(-14, -7);
+    const avg = (days: typeof allDays) =>
+      days.length === 0
+        ? 0
+        : Math.round(days.reduce((s, [, v]) => s + v.total / v.count, 0) / days.length);
+    const weekDelta = avg(last7) - avg(prev7);
+
+    return { points, weekDelta };
+  }
+
+  // ── Weak Areas ────────────────────────────────────────────────────────────
+
+  async getMeWeakAreas(userId: string) {
+    const student = await this.prisma.student.findUnique({
+      where: { userId },
+      select: { id: true },
+    });
+    if (!student) throw new NotFoundException('Student profile not found');
+
+    // Last 30 days of progress per category
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const entries = await this.prisma.progress.findMany({
+      where: { studentId: student.id, createdAt: { gte: since }, category: { not: 'OVERALL' as any } },
+      select: { category: true, score: true },
+    });
+
+    // Average score per category
+    const catMap = new Map<string, { total: number; count: number }>();
+    for (const e of entries) {
+      const bucket = catMap.get(e.category) ?? { total: 0, count: 0 };
+      bucket.total += e.score;
+      bucket.count += 1;
+      catMap.set(e.category, bucket);
+    }
+
+    const RECOMMENDATIONS: Record<string, string> = {
+      READING: 'Practice reading fluency with short Surahs',
+      TAJWEED: 'Review Tajweed rules in the lesson library',
+      MEMORIZATION: 'Use spaced repetition for new verses',
+      FLUENCY: 'Record yourself and compare to the reference',
+    };
+
+    const weakAreas = Array.from(catMap.entries())
+      .map(([cat, { total, count }]) => ({
+        area: cat.charAt(0) + cat.slice(1).toLowerCase(),
+        avgScore: Math.round(total / count),
+        severity: total / count < 60 ? 'high' : 'medium',
+        recommendation: RECOMMENDATIONS[cat] ?? 'Keep practising',
+      }))
+      .filter((a) => a.avgScore < 80) // only show areas that need work
+      .sort((a, b) => a.avgScore - b.avgScore) // worst first
+      .slice(0, 3);
+
+    return { weakAreas };
+  }
+
+  // ── Progress Breakdown (per category) ─────────────────────────────────────
+
+  async getMeProgressBreakdown(userId: string) {
+    const student = await this.prisma.student.findUnique({
+      where: { userId },
+      select: { id: true },
+    });
+    if (!student) throw new NotFoundException('Student profile not found');
+
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const entries = await this.prisma.progress.findMany({
+      where: { studentId: student.id, createdAt: { gte: since } },
+      select: { category: true, score: true },
+    });
+
+    const catMap = new Map<string, { total: number; count: number }>();
+    for (const e of entries) {
+      const bucket = catMap.get(e.category) ?? { total: 0, count: 0 };
+      bucket.total += e.score;
+      bucket.count += 1;
+      catMap.set(e.category, bucket);
+    }
+
+    const DISPLAY_CATEGORIES = ['READING', 'TAJWEED', 'MEMORIZATION', 'FLUENCY'];
+    const COLORS: Record<string, string> = {
+      READING: '#1455B8',
+      TAJWEED: '#16A6A0',
+      MEMORIZATION: '#18A96B',
+      FLUENCY: '#D9A441',
+    };
+
+    const breakdown = DISPLAY_CATEGORIES.map((cat) => {
+      const data = catMap.get(cat);
+      return {
+        label: cat.charAt(0) + cat.slice(1).toLowerCase(),
+        value: data ? Math.round(data.total / data.count) : 0,
+        color: COLORS[cat],
+      };
+    });
+
+    const overallData = catMap.get('OVERALL');
+    const nonZero = breakdown.filter((b) => b.value > 0);
+    const overall =
+      overallData
+        ? Math.round(overallData.total / overallData.count)
+        : nonZero.length > 0
+          ? Math.round(nonZero.reduce((s, b) => s + b.value, 0) / nonZero.length)
+          : 0;
+
+    return { breakdown, overall };
+  }
 }
