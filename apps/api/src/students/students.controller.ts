@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Body, Put, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Param, Body, Put, UseGuards, Request, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { StudentsService } from './students.service';
 
@@ -9,6 +9,29 @@ import { StudentsService } from './students.service';
 @ApiBearerAuth()
 export class StudentsController {
   constructor(private studentsService: StudentsService) {}
+
+  // ── /me routes (authenticated student resolves by JWT userId) ─────────────
+
+  @Get('me')
+  @ApiOperation({ summary: 'Get current student profile' })
+  async getMe(@Request() req: any) {
+    return this.studentsService.getMe(req.user.userId);
+  }
+
+  @Get('me/progress')
+  @ApiOperation({ summary: 'Get current student learning progress summary' })
+  async getMeProgress(@Request() req: any) {
+    return this.studentsService.getMeProgress(req.user.userId);
+  }
+
+  @Get('me/progress/history')
+  @ApiOperation({ summary: 'Get current student daily activity history for streak calculation' })
+  @ApiQuery({ name: 'from', required: false, description: 'Start date YYYY-MM-DD (default: 90 days ago)' })
+  async getMeProgressHistory(@Request() req: any, @Query('from') from?: string) {
+    return this.studentsService.getMeProgressHistory(req.user.userId, from ?? '');
+  }
+
+  // ── Generic CRUD routes ───────────────────────────────────────────────────
 
   @Get()
   @ApiOperation({ summary: 'Get all students' })
@@ -20,6 +43,12 @@ export class StudentsController {
   @ApiOperation({ summary: 'Get student by ID' })
   async findOne(@Param('id') id: string) {
     return this.studentsService.findOne(id);
+  }
+
+  @Get(':id/dashboard')
+  @ApiOperation({ summary: 'Get student dashboard stats' })
+  async getDashboard(@Param('id') id: string) {
+    return this.studentsService.getDashboard(id);
   }
 
   @Put(':id')
