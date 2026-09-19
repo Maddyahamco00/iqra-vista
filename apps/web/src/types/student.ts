@@ -13,7 +13,9 @@ export interface LearningProgress {
   currentStreakDays: number;
   longestStreakDays: number;
   averageScore: number;
-  lastActiveAt: string;
+  accuracyTrend: 'up' | 'down' | 'stable';
+  lastAssessmentAt: string | null;
+  lastActiveAt: string | null;
 }
 
 export interface Assignment {

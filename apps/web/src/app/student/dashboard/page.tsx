@@ -14,7 +14,12 @@ import { Achievements } from '@/components/student/Achievements';
 import { BookOpen, Clock, Target } from 'lucide-react';
 
 export default function StudentDashboard() {
-  const { profile, progress, streaks, isLoading, errors, streakLoading, streakError, refetchStreak } = useDashboard();
+  const {
+    profile, progress, streaks,
+    isLoading, errors,
+    streakLoading, streakError, refetchStreak,
+    accuracyLoading, accuracyScore, accuracyTrend, lastAssessmentAt,
+  } = useDashboard();
   const { currentStreak, longestStreak } = streaks;
 
   if (isLoading && !profile) {
@@ -36,6 +41,24 @@ export default function StudentDashboard() {
   const completedLessons = progress?.totalLessonsCompleted ?? 0;
   const totalLessons = progress?.totalLessons ?? 0;
   const averageScore = progress?.averageScore ?? 0;
+
+  // Accuracy trend arrow label
+  const trendLabel =
+    accuracyTrend === 'up' ? '↑' : accuracyTrend === 'down' ? '↓' : '→';
+  const trendColor =
+    accuracyTrend === 'up' ? '#18A96B' : accuracyTrend === 'down' ? '#ef4444' : '#94a3b8';
+
+  // Last assessed subtext — friendly relative date
+  const lastAssessedSubtext = (() => {
+    if (accuracyLoading) return 'Loading…';
+    if (!lastAssessmentAt) return 'No assessments yet';
+    const days = Math.floor(
+      (Date.now() - new Date(lastAssessmentAt).getTime()) / 86_400_000,
+    );
+    if (days === 0) return 'Assessed today';
+    if (days === 1) return 'Assessed yesterday';
+    return `Assessed ${days}d ago`;
+  })();
 
   return (
     <DashboardLayout sidebar={<StudentSidebar />}>
@@ -88,10 +111,16 @@ export default function StudentDashboard() {
           />
           <StatCard
             label="Accuracy"
-            value={`${averageScore}%`}
+            value={
+              accuracyLoading
+                ? '—'
+                : `${accuracyScore}%`
+            }
             icon={<Target className="w-5 h-5" />}
             accent="#D9A441"
             bg="rgba(217,164,65,0.06)"
+            subtext={lastAssessedSubtext}
+            trend={accuracyLoading ? undefined : { label: trendLabel, color: trendColor }}
           />
         </div>
       )}
@@ -116,7 +145,7 @@ export default function StudentDashboard() {
             streak={currentStreak}
             longestStreak={longestStreak}
             completedLessons={completedLessons}
-            averageScore={averageScore}
+            averageScore={accuracyScore}
             isLoading={streakLoading}
           />
         </div>
@@ -132,6 +161,7 @@ function StatCard({
   accent,
   bg,
   subtext,
+  trend,
 }: {
   label: string;
   value: string;
@@ -139,6 +169,7 @@ function StatCard({
   accent: string;
   bg: string;
   subtext?: string;
+  trend?: { label: string; color: string };
 }) {
   return (
     <div className="iv-card p-4 sm:p-5">
@@ -148,7 +179,14 @@ function StatCard({
       >
         {icon}
       </div>
-      <p className="text-lg sm:text-xl font-bold text-navy-800">{value}</p>
+      <div className="flex items-baseline gap-1.5">
+        <p className="text-lg sm:text-xl font-bold text-navy-800">{value}</p>
+        {trend && (
+          <span className="text-sm font-bold" style={{ color: trend.color }}>
+            {trend.label}
+          </span>
+        )}
+      </div>
       <p className="text-xs text-slate-500 mt-0.5 font-medium">{label}</p>
       {subtext && <p className="text-xs text-slate-400 mt-0.5">{subtext}</p>}
     </div>

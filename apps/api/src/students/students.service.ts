@@ -102,16 +102,43 @@ export class StudentsService {
   async getMeProgress(userId: string) {
     const student = await this.prisma.student.findUnique({
       where: { userId },
-      select: { id: true, progress: true, lessonsCompleted: true, assessments: { orderBy: { createdAt: 'desc' }, take: 1 } },
+      select: {
+        id: true,
+        progress: true,
+        lessonsCompleted: true,
+        // Fetch last 20 assessments so we can split into two windows of 10
+        assessments: {
+          orderBy: { createdAt: 'desc' },
+          take: 20,
+          select: { score: true, createdAt: true },
+        },
+      },
     });
     if (!student) throw new NotFoundException('Student profile not found');
 
     const totalLessons = await this.prisma.lesson.count();
     const totalLessonsCompleted = student.lessonsCompleted.length;
 
-    const averageScore =
-      student.assessments.length > 0 ? (student.assessments[0].score ?? 0) : 0;
+    // ── Accuracy: weighted average of last 10 non-null scored assessments ──
+    const scored = student.assessments.filter((a) => a.score !== null);
+    const recent10 = scored.slice(0, 10);
+    const prior10  = scored.slice(10, 20);
 
+    const avgOf = (items: typeof recent10): number =>
+      items.length === 0
+        ? 0
+        : Math.round(items.reduce((s, a) => s + (a.score as number), 0) / items.length);
+
+    const averageScore    = avgOf(recent10);
+    const priorAvgScore   = avgOf(prior10);
+    const delta           = averageScore - priorAvgScore;
+    const accuracyTrend: 'up' | 'down' | 'stable' =
+      prior10.length === 0 ? 'stable' : delta > 2 ? 'up' : delta < -2 ? 'down' : 'stable';
+
+    const lastAssessmentAt =
+      scored.length > 0 ? scored[0].createdAt.toISOString() : null;
+
+    // ── Streak ──────────────────────────────────────────────────────────────
     const lastCompletion = student.lessonsCompleted.reduce<Date | null>((latest, lc) => {
       return !latest || lc.completedAt > latest ? lc.completedAt : latest;
     }, null);
@@ -128,6 +155,8 @@ export class StudentsService {
       currentStreakDays: currentStreak,
       longestStreakDays: longestStreak,
       averageScore,
+      accuracyTrend,
+      lastAssessmentAt,
       lastActiveAt: lastCompletion ? lastCompletion.toISOString() : null,
     };
   }

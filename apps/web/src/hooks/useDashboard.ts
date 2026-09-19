@@ -69,5 +69,11 @@ export function useDashboard() {
     streakError: history.isError,
     lastActiveDate: streaks.lastActiveDate,
     refetchStreak: history.refetch,
+
+    // Accuracy — derived from progress query
+    accuracyLoading: progress.isLoading || progress.isFetching,
+    accuracyScore: progress.data?.averageScore ?? 0,
+    accuracyTrend: progress.data?.accuracyTrend ?? 'stable',
+    lastAssessmentAt: progress.data?.lastAssessmentAt ?? null,
   };
 }
