@@ -1,10 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { calculateStreakFromDates } from './streak.utils';
+import { TodayPlanLoader } from './today-plan.loader';
+import { generateTodayPlan } from './today-plan.algorithm';
 
 @Injectable()
 export class StudentsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private todayPlanLoader: TodayPlanLoader,
+  ) {}
 
   async findAll() {
     return this.prisma.student.findMany({
@@ -57,9 +62,9 @@ export class StudentsService {
 
   private calculateStreak(progress: any[]): number {
     if (progress.length === 0) return 0;
-    const dates = [...new Set(progress.map((p) =>
+    const dates = Array.from(new Set(progress.map((p) =>
       new Date(p.createdAt).toISOString().split('T')[0]
-    ))].sort().reverse();
+    ))).sort().reverse();
 
     let streak = 0;
     for (let i = 0; i < dates.length; i++) {
@@ -143,9 +148,9 @@ export class StudentsService {
       return !latest || lc.completedAt > latest ? lc.completedAt : latest;
     }, null);
 
-    const dates = [...new Set(
+    const dates = Array.from(new Set(
       student.progress.map((p) => p.createdAt.toISOString().split('T')[0]),
-    )].sort().reverse();
+    )).sort().reverse();
 
     const { currentStreak, longestStreak } = calculateStreakFromDates(dates);
 
@@ -388,4 +393,30 @@ export class StudentsService {
 
     return { breakdown, overall };
   }
+
+  async getTodayPlan(studentId: string, requester: { userId: string; role: string }): Promise<any> {
+    const student = await this.prisma.student.findUnique({
+      where: { id: studentId },
+      include: { user: true },
+    });
+
+    if (!student) {
+      throw new NotFoundException('Student not found.');
+    }
+
+    const isOwner = student.userId === requester.userId;
+    const isAdmin = requester.role === 'ADMIN';
+    if (!isOwner && !isAdmin) {
+      throw new ForbiddenException('You do not have permission to view this student plan.');
+    }
+
+    const now = new Date();
+    const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
+      .toISOString()
+      .slice(0, 10);
+
+    const input = await this.todayPlanLoader.load(student.id, date);
+    return generateTodayPlan(input);
+  }
 }
+

@@ -63,6 +63,16 @@ export class StudentsController {
     return this.studentsService.findAll();
   }
 
+  @Get(':id/today-plan')
+  @ApiOperation({ summary: 'Get student plan for today' })
+  getTodayPlan(@Param('id') id: string, @Request() req: any) {
+    const requester = {
+      userId: req.user.id ?? req.user.sub ?? req.user.userId,
+      role: req.user.role,
+    };
+    return this.studentsService.getTodayPlan(id, requester);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get student by ID' })
   async findOne(@Param('id') id: string) {
